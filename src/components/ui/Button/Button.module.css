@@ -1,1 +1,38 @@
-/* Button styles */
+.button {
+  height: 44px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.outline {
+  background: #fff;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.outline:hover:not(:disabled) {
+  background: #f9fafb;
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
