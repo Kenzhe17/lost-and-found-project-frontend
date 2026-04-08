@@ -1,1 +1,206 @@
 /* Home page styles */
+ .container {
+  color: #222;
+  min-height: 100vh;
+  background: #f7f7f7;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  gap: 16px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #fff;
+  font-size: 12px;
+}
+
+.navLinks {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: #4a6cf7;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.actionLink {
+  text-decoration: none;
+}
+
+.profileLink {
+  text-decoration: none;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.hero {
+  background: linear-gradient(135deg, #4a6cf7, #2ca3f7);
+  color: #fff;
+}
+
+.searchSection {
+  text-align: center;
+  padding: 72px 16px;
+}
+
+.searchSection h1 {
+  font-size: 40px;
+  margin-bottom: 24px;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  min-width: 280px;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  padding: 0 14px;
+  font-size: 15px;
+}
+
+.select {
+  min-width: 200px;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  padding: 0 12px;
+}
+
+.reportButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.reportLink {
+  text-decoration: none;
+}
+
+.lostBtn,
+.foundBtn {
+  border: none;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lostBtn {
+  background: #16a34a;
+}
+
+.foundBtn {
+  background: #22c55e;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 16px 56px;
+  flex-wrap: wrap;
+}
+
+.featureCard {
+  background: #f8f3f4;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 300px;
+  text-align: center;
+  border: 1px solid #eee;
+}
+
+.featureCard h3 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.featureCard p {
+  font-size: 14px;
+  color: #555;
+}
+
+.icon {
+  font-size: 28px;
+}
+
+@media (max-width: 980px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 14px 16px;
+  }
+
+  .navLinks {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchSection h1 {
+    font-size: 30px;
+  }
+
+  .searchBar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .searchInput,
+  .select {
+    width: min(420px, 100%);
+  }
+
+  .reportButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lostBtn,
+  .foundBtn {
+    width: min(420px, 100%);
+  }
+}
