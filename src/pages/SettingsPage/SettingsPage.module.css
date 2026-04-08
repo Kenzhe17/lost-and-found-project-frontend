@@ -1,1 +1,138 @@
-/* Settings page styles */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+
+.title {
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  margin-bottom: 24px;
+  color: #555;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 200px;
+}
+
+.sidebar button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background: #f4f4f6;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar .active {
+  background: #4a90e2;
+  color: #fff;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profileSettings {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.profileSettings h2 {
+  margin: 0;
+}
+
+.avatarSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #4a90e2;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.changePhotoLabel {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.fileInput {
+  display: none;
+}
+
+.placeholder {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.placeholder h2 {
+  margin: 0 0 8px;
+}
+
+.placeholder p {
+  margin: 0;
+  color: #555;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.success {
+  color: #16a34a;
+}
+
+.state {
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
