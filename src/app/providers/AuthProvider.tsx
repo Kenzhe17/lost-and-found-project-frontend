@@ -1,1 +1,1 @@
-// Auth provider placeholder
+export { AuthProvider } from "../../context/AuthContext";

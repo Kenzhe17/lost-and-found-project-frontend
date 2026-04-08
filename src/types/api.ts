@@ -1,1 +1,4 @@
-// API types placeholder
+export type ApiMessage = {
+  message?: string;
+  error?: string;
+};

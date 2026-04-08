@@ -1,1 +1,24 @@
-/* Global styles placeholder */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.page {
+  padding: var(--space-6);
+}
+
+.pageTitle {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-3);
+}
