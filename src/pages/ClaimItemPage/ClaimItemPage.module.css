@@ -1,1 +1,122 @@
-/* Claim item page styles */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+
+.title {
+  margin-bottom: 16px;
+  font-size: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.finderInfo {
+  background: #f4f6f8;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.finderInfo h3 {
+  margin: 0 0 4px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.label {
+  font-size: 12px;
+  color: #555;
+}
+
+.claimForm {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.imageUpload {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.imageUpload img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.fileLabel {
+  display: grid;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.fileInput {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.userInfo {
+  flex: 2 1 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.helperText {
+  font-size: 12px;
+  color: #888;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.error {
+  color: #ef4444;
+}
+
+.success {
+  color: #16a34a;
+}
+
+.state {
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .claimForm {
+    flex-direction: column;
+  }
+
+  .infoRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+}
