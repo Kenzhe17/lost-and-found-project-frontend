@@ -78,7 +78,7 @@ export default function ClaimItemPage() {
 
       await createClaim(id, message);
       setSuccess("Claim submitted successfully.");
-      setTimeout(() => navigate("/claims/my"), 800);
+      setTimeout(() => navigate("/profile"), 800);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to submit claim.");
     } finally {

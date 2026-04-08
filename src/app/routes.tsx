@@ -11,25 +11,14 @@ import SettingsPage from "../pages/SettingsPage/SettingsPage";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import NotificationsPage from "../pages/NotificationsPage/NotificationsPage";
 import ClaimItemPage from "../pages/ClaimItemPage/ClaimItemPage";
-import MyClaimsPage from "../pages/MyClaimsPage/MyClaimsPage";
-import MyItemsPage from "../pages/MyItemsPage/MyItemsPage";
-import ItemDetailsPage from "../pages/ItemDetailsPage/ItemDetailsPage";
 
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-
-      <Route
-        path="/home"
-        element={
-          <ProtectedRoute>
-            <HomePage />
-          </ProtectedRoute>
-        }
-      />
       <Route
         path="/lost"
         element={
@@ -87,30 +76,6 @@ export function AppRoutes() {
         }
       />
       <Route
-        path="/claims/my"
-        element={
-          <ProtectedRoute>
-            <MyClaimsPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/items/my"
-        element={
-          <ProtectedRoute>
-            <MyItemsPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/items/:id"
-        element={
-          <ProtectedRoute>
-            <ItemDetailsPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
         path="/items/:id/claim"
         element={
           <ProtectedRoute>
@@ -119,7 +84,7 @@ export function AppRoutes() {
         }
       />
 
-      <Route path="*" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
