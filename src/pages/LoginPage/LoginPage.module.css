@@ -1,1 +1,151 @@
-/* Login page styles */
+.page {
+  min-height: 100vh;
+  background-color: #f7f7f7;
+}
+
+.nav {
+  height: 72px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 32px;
+}
+
+.brandMark {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+
+.brandName {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.main {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.intro h1 {
+  margin-bottom: 8px;
+  font-size: 48px;
+  line-height: 1.1;
+}
+
+.intro p {
+  color: #666;
+  font-size: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.forgot {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: -4px;
+}
+
+.divider {
+  text-align: center;
+  margin: 24px 0 16px;
+  font-size: 14px;
+  color: #888;
+}
+
+.signup {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+.signup a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 16px;
+  }
+
+  .brandName {
+    font-size: 24px;
+  }
+
+  .intro h1 {
+    font-size: 36px;
+  }
+
+  .intro p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 24px;
+  }
+
+  .intro h1 {
+    font-size: 30px;
+  }
+}
