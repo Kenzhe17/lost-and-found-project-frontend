@@ -1,12 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./NotificationsPage.module.css";
 import Button from "../../components/ui/Button/Button";
+import { getItemClaims, getMyItems } from "../../api/items";
 
-type NotificationType = "match" | "claim" | "general";
+type NotificationType = "claim";
 
 type Notification = {
-  id: number;
+  id: string;
   title: string;
   message: string;
   timeAgo: string;
@@ -14,62 +15,68 @@ type Notification = {
   type: NotificationType;
 };
 
-const initialNotifications: Notification[] = [
-  {
-    id: 1,
-    title: "Potential Match Found",
-    message: "Someone has found an item matching your lost MacBook Pro",
-    timeAgo: "2 hours ago",
-    read: false,
-    type: "match",
-  },
-  {
-    id: 2,
-    title: "Item Claim Request",
-    message: "Sarah Miller wants to claim the iPhone you found",
-    timeAgo: "5 hours ago",
-    read: false,
-    type: "claim",
-  },
-  {
-    id: 3,
-    title: "Report Verified",
-    message: "Your lost item report has been verified and published",
-    timeAgo: "1 day ago",
-    read: true,
-    type: "general",
-  },
-  {
-    id: 4,
-    title: "Status Update",
-    message: "The status of your lost wallet report has been updated",
-    timeAgo: "2 days ago",
-    read: true,
-    type: "general",
-  },
-  {
-    id: 5,
-    title: "New Match Alert",
-    message: "A new item matching your lost keys has been posted",
-    timeAgo: "3 days ago",
-    read: false,
-    type: "match",
-  },
-];
+const notificationFilters = ["All Notifications", "Unread", "Claims"] as const;
 
-const notificationFilters = ["All Notifications", "Unread", "Matches", "Claims"] as const;
+function formatTimeAgo(iso: string) {
+  const date = new Date(iso);
+  const diffMs = Date.now() - date.getTime();
+  const minutes = Math.max(1, Math.floor(diffMs / 60000));
+  if (minutes < 60) return `${minutes} min ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  const days = Math.floor(hours / 24);
+  return `${days} day${days > 1 ? "s" : ""} ago`;
+}
 
 export default function NotificationsPage() {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState<(typeof notificationFilters)[number]>(
     "All Notifications",
   );
-  const [notifications, setNotifications] = useState(initialNotifications);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadNotifications = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const myItems = await getMyItems();
+        const claimsByItem = await Promise.all(
+          myItems.map(async (item) => ({
+            item,
+            claims: await getItemClaims(item.id),
+          })),
+        );
+
+        const claimNotifications: Notification[] = claimsByItem
+          .flatMap(({ item, claims }) =>
+            claims.map((claim) => ({
+              id: `claim-${claim.id}`,
+              title: "Item Claim Request",
+              message: `${claim.user.name} wants to claim "${item.title}"`,
+              timeAgo: formatTimeAgo(claim.createdAt),
+              read: false,
+              type: "claim" as const,
+            })),
+          )
+          .reverse();
+
+        setNotifications(claimNotifications);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load notifications.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadNotifications();
+  }, []);
 
   const visibleNotifications = useMemo(() => {
     if (activeFilter === "Unread") return notifications.filter((n) => !n.read);
-    if (activeFilter === "Matches") return notifications.filter((n) => n.type === "match");
-    if (activeFilter === "Claims") return notifications.filter((n) => n.type === "claim");
     return notifications;
   }, [activeFilter, notifications]);
 
@@ -109,6 +116,12 @@ export default function NotificationsPage() {
           </button>
         ))}
       </div>
+
+      {loading ? <p className={styles.stateMessage}>Loading notifications...</p> : null}
+      {error ? <p className={styles.error}>{error}</p> : null}
+      {!loading && !error && visibleNotifications.length === 0 ? (
+        <p className={styles.stateMessage}>No notifications yet.</p>
+      ) : null}
 
       <div className={styles.notificationsList}>
         {visibleNotifications.map((n) => (
