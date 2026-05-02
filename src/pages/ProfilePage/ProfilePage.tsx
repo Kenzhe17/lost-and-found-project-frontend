@@ -92,7 +92,9 @@ export default function ProfilePage() {
           <Link to="/home" className={styles.navLink}>
             Home
           </Link>
-          <button className={styles.active}>Reported Items</button>
+          <Link to="/profile" className={`${styles.navLink} ${styles.active}`}>
+            Reported Items
+          </Link>
           <Link to="/notifications" className={styles.navLink}>
             Notifications
           </Link>
