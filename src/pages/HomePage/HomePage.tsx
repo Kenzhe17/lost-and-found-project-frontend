@@ -1,24 +1,53 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import Button from "../../components/ui/Button/Button";
 import { useAuth } from "../../hooks/useAuth";
+import { getItems } from "../../api/items";
+import type { Item } from "../../types/item";
 
 export default function HomePage() {
   const navigate = useNavigate();
   const { isAuthenticated, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [street, setStreet] = useState("");
+  const [items, setItems] = useState<Item[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  const goToSearch = (type: "lost" | "found") => {
+  useEffect(() => {
+    const loadItems = async () => {
+      try {
+        const data = await getItems();
+        setItems(data);
+      } catch {
+        setItems([]);
+      }
+    };
+
+    loadItems();
+  }, []);
+
+  const suggestions = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return [];
+
+    return items
+      .filter((item) => {
+        const textMatch = `${item.title} ${item.description ?? ""} ${item.location}`
+          .toLowerCase()
+          .includes(query);
+        const cityMatch = !street || item.location.toLowerCase().includes(street.toLowerCase());
+        return textMatch && cityMatch;
+      })
+      .slice(0, 6);
+  }, [items, searchQuery, street]);
+
+  const goToItemCollection = (item: Item) => {
     const params = new URLSearchParams();
-    const query = searchQuery.trim();
-    if (query) params.set("query", query);
+    params.set("query", item.title);
     if (street) params.set("street", street);
-
-    const base = type === "lost" ? "/lost" : "/found";
-    const qs = params.toString();
-    navigate(qs ? `${base}?${qs}` : base);
+    const base = item.type === "FOUND" ? "/found" : "/lost";
+    navigate(`${base}?${params.toString()}`);
   };
 
   return (
@@ -29,18 +58,6 @@ export default function HomePage() {
             <span className={styles.logoIcon}>♥</span>
             <span>TapQoi</span>
           </div>
-
-          <ul className={styles.navLinks}>
-            <li>
-              <Link to="/lost">Lost Items</Link>
-            </li>
-            <li>
-              <Link to="/found">Found Items</Link>
-            </li>
-            <li>
-              <Link to="/submit">Report Item</Link>
-            </li>
-          </ul>
 
           <div className={styles.actions}>
             {isAuthenticated ? (
@@ -75,17 +92,38 @@ export default function HomePage() {
         <div className={styles.searchSection}>
           <h1>Lost something? Find it here</h1>
           <div className={styles.searchBar}>
-            <input
-              className={styles.searchInput}
-              placeholder="Search Lost Items..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  goToSearch("lost");
-                }
-              }}
-            />
+            <div className={styles.searchInputWrap}>
+              <input
+                className={styles.searchInput}
+                placeholder="Search all items..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+              />
+              {showSuggestions && searchQuery.trim() && suggestions.length > 0 ? (
+                <div className={styles.suggestions}>
+                  {suggestions.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      className={styles.suggestionItem}
+                      onClick={() => {
+                        setShowSuggestions(false);
+                        goToItemCollection(item);
+                      }}
+                    >
+                      <span className={styles.suggestionTitle}>{item.title}</span>
+                      <span className={styles.suggestionMeta}>
+                        {item.type} · {item.location}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+            </div>
             <select value={street} onChange={(e) => setStreet(e.target.value)} className={styles.select}>
               <option value="">All cities</option>
               <option value="Алматы">Almaty</option>
@@ -94,11 +132,8 @@ export default function HomePage() {
             </select>
           </div>
           <div className={styles.searchActions}>
-            <button type="button" className={styles.lostBtn} onClick={() => goToSearch("lost")}>
-              Search Lost
-            </button>
-            <button type="button" className={styles.foundBtn} onClick={() => goToSearch("found")}>
-              Search Found
+            <button type="button" className={styles.foundBtn} onClick={() => navigate("/submit")}>
+              + Report Item
             </button>
           </div>
         </div>
