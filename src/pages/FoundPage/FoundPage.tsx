@@ -4,7 +4,7 @@ import styles from "./FoundPage.module.css";
 import { getItems } from "../../api/items";
 import type { Item } from "../../types/item";
 
-const categories = ["All Items", "Electronics", "Bags", "Jewelry", "Accessories"];
+const categories = ["All Items", "Electronics", "Bags", "Jewelry", "Accessories", "Others"];
 
 function getStatusLabel(status: Item["status"]) {
   if (status === "OPEN") return "Unclaimed";

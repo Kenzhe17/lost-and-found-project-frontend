@@ -92,9 +92,9 @@ export default function ProfilePage() {
           <Link to="/home" className={styles.navLink}>
             Home
           </Link>
-          <Link to="/profile" className={`${styles.navLink} ${styles.active}`}>
+          <a href="#reported-items" className={`${styles.navLink} ${styles.active}`}>
             Reported Items
-          </Link>
+          </a>
           <Link to="/notifications" className={styles.navLink}>
             Notifications
           </Link>
@@ -105,7 +105,7 @@ export default function ProfilePage() {
       </aside>
 
       <main className={styles.main}>
-        <h1>Your Reported Items</h1>
+        <h1 id="reported-items">Your Reported Items</h1>
 
         {items.length === 0 ? <p className={styles.empty}>You have no reported items yet.</p> : null}
 

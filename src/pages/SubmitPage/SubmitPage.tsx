@@ -6,7 +6,7 @@ import Input from "../../components/ui/Input/Input";
 import Textarea from "../../components/ui/Textarea/Textarea";
 import { createItem } from "../../api/items";
 
-const categories = ["Electronics", "Bags", "Jewelry", "Accessories"];
+const categories = ["Electronics", "Bags", "Jewelry", "Accessories", "Others"];
 
 export default function SubmitPage() {
   const navigate = useNavigate();

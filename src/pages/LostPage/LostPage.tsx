@@ -4,7 +4,7 @@ import styles from "./LostPage.module.css";
 import { getItems } from "../../api/items";
 import type { Item } from "../../types/item";
 
-const categories = ["All Items", "Electronics", "Bags", "Jewelry", "Accessories"];
+const categories = ["All Items", "Electronics", "Bags", "Jewelry", "Accessories", "Others"];
 
 export default function LostPage() {
   const navigate = useNavigate();
