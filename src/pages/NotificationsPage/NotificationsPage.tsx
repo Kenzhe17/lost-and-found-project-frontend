@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./NotificationsPage.module.css";
 import Button from "../../components/ui/Button/Button";
 
@@ -60,6 +60,7 @@ const initialNotifications: Notification[] = [
 const notificationFilters = ["All Notifications", "Unread", "Matches", "Claims"] as const;
 
 export default function NotificationsPage() {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState<(typeof notificationFilters)[number]>(
     "All Notifications",
   );
@@ -79,6 +80,9 @@ export default function NotificationsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.topActions}>
+        <button type="button" className={styles.backBtn} onClick={() => navigate(-1)}>
+          Back
+        </button>
         <Link to="/home" className={styles.homeLink}>
           Home
         </Link>

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./SettingsPage.module.css";
 import Button from "../../components/ui/Button/Button";
 import Input from "../../components/ui/Input/Input";
@@ -17,6 +17,7 @@ function initialsFromName(name: string) {
 }
 
 export default function SettingsPage() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<Tab>("Profile");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -77,6 +78,9 @@ export default function SettingsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.topActions}>
+        <button type="button" className={styles.backBtn} onClick={() => navigate(-1)}>
+          Back
+        </button>
         <Link to="/home" className={styles.homeLink}>
           Home
         </Link>
