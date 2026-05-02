@@ -77,11 +77,11 @@
 .navLink {
   padding: 8px 12px;
   border: none;
-  background: none;
+  background: #4a90e2;
   border-radius: 6px;
   text-align: left;
   text-decoration: none;
-  color: #222;
+  color: #fff;
   font-size: 14px;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .navLink:hover {
-  background: #f3f4f6;
+  background: #3e83d4;
 }
 
 .nav .active {

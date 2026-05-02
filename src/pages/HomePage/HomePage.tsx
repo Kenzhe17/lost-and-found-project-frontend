@@ -21,9 +21,6 @@ export default function HomePage() {
 
           <ul className={styles.navLinks}>
             <li>
-              <Link to="/home">Home</Link>
-            </li>
-            <li>
               <Link to="/lost">Lost Items</Link>
             </li>
             <li>
