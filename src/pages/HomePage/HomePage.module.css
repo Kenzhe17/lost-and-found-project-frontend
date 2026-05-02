@@ -111,6 +111,14 @@
   flex-wrap: wrap;
 }
 
+.searchActions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
 .reportLink {
   text-decoration: none;
 }
@@ -195,6 +203,11 @@
   }
 
   .reportButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .searchActions {
     flex-direction: column;
     align-items: center;
   }

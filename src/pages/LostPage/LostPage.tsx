@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./LostPage.module.css";
 import { getItems } from "../../api/items";
 import type { Item } from "../../types/item";
@@ -8,7 +8,12 @@ const categories = ["All Items", "Electronics", "Bags", "Jewelry", "Accessories"
 
 export default function LostPage() {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const initialQuery = searchParams.get("query") ?? "";
+  const initialCity = searchParams.get("street") ?? "";
+
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
+  const [cityFilter, setCityFilter] = useState(initialCity);
   const [selectedCategory, setSelectedCategory] = useState("All Items");
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,9 +45,12 @@ export default function LostPage() {
         selectedCategory === "All Items" ||
         item.category.toLowerCase() === selectedCategory.toLowerCase();
 
-      return textMatch && categoryMatch;
+      const cityMatch =
+        !cityFilter || item.location.toLowerCase().includes(cityFilter.toLowerCase());
+
+      return textMatch && categoryMatch && cityMatch;
     });
-  }, [items, searchQuery, selectedCategory]);
+  }, [items, searchQuery, selectedCategory, cityFilter]);
 
   return (
     <div className={styles.container}>

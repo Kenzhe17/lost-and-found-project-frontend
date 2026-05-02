@@ -10,6 +10,17 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [street, setStreet] = useState("");
 
+  const goToSearch = (type: "lost" | "found") => {
+    const params = new URLSearchParams();
+    const query = searchQuery.trim();
+    if (query) params.set("query", query);
+    if (street) params.set("street", street);
+
+    const base = type === "lost" ? "/lost" : "/found";
+    const qs = params.toString();
+    navigate(qs ? `${base}?${qs}` : base);
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.hero}>
@@ -69,13 +80,26 @@ export default function HomePage() {
               placeholder="Search Lost Items..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  goToSearch("lost");
+                }
+              }}
             />
             <select value={street} onChange={(e) => setStreet(e.target.value)} className={styles.select}>
-              <option value="">Select street</option>
-              <option value="dostyk">Dostyk Avenue</option>
-              <option value="tolebi">Tole Bi Street</option>
-              <option value="abay">Abay Avenue</option>
+              <option value="">All cities</option>
+              <option value="Алматы">Almaty</option>
+              <option value="Астана">Astana</option>
+              <option value="Шымкент">Shymkent</option>
             </select>
+          </div>
+          <div className={styles.searchActions}>
+            <button type="button" className={styles.lostBtn} onClick={() => goToSearch("lost")}>
+              Search Lost
+            </button>
+            <button type="button" className={styles.foundBtn} onClick={() => goToSearch("found")}>
+              Search Found
+            </button>
           </div>
           <div className={styles.reportButtons}>
             <Link to="/submit" className={styles.reportLink}>
