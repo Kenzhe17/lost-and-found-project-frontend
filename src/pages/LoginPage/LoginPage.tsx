@@ -91,7 +91,7 @@ export default function LoginPage() {
                 Remember me
               </label>
               <button type="button" className={styles.forgot} disabled>
-                Forgot password (coming soon)
+                Forgot password?
               </button>
             </div>
 
