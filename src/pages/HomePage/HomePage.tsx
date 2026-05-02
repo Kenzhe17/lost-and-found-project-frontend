@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import Button from "../../components/ui/Button/Button";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function HomePage() {
-  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [street, setStreet] = useState("");
 
@@ -14,7 +15,7 @@ export default function HomePage() {
       <header className={styles.hero}>
         <nav className={styles.navbar}>
           <div className={styles.logo}>
-            <span className={styles.logoIcon}>❤</span>
+            <span className={styles.logoIcon}>♥</span>
             <span>TapQoi</span>
           </div>
 
@@ -35,17 +36,29 @@ export default function HomePage() {
 
           <div className={styles.actions}>
             {isAuthenticated ? (
-              <Link to="/profile" className={styles.profileLink}>
-                Profile
-              </Link>
+              <>
+                <Link to="/profile" className={styles.profileLink}>
+                  Profile
+                </Link>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    logout();
+                    navigate("/home");
+                  }}
+                >
+                  Log out
+                </Button>
+              </>
             ) : (
               <>
-                <Link to="/login" className={styles.actionLink}>
-                  <Button variant="outline">Log in</Button>
-                </Link>
-                <Link to="/signup" className={styles.actionLink}>
-                  <Button>Sign up</Button>
-                </Link>
+                <Button type="button" variant="outline" onClick={() => navigate("/login")}>
+                  Log in
+                </Button>
+                <Button type="button" onClick={() => navigate("/signup")}>
+                  Sign up
+                </Button>
               </>
             )}
           </div>
@@ -69,14 +82,10 @@ export default function HomePage() {
           </div>
           <div className={styles.reportButtons}>
             <Link to="/submit" className={styles.reportLink}>
-              <button type="button" className={styles.lostBtn}>
-                + Report Lost Item
-              </button>
+              <span className={styles.lostBtn}>+ Report Lost Item</span>
             </Link>
             <Link to="/submit" className={styles.reportLink}>
-              <button type="button" className={styles.foundBtn}>
-                + Report Found Item
-              </button>
+              <span className={styles.foundBtn}>+ Report Found Item</span>
             </Link>
           </div>
         </div>

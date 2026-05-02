@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./LostPage.module.css";
-import Button from "../../components/ui/Button/Button";
 import { getItems } from "../../api/items";
 import type { Item } from "../../types/item";
 
 const categories = ["All Items", "Electronics", "Bags", "Jewelry", "Accessories"];
 
 export default function LostPage() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Items");
   const [items, setItems] = useState<Item[]>([]);
@@ -48,9 +48,9 @@ export default function LostPage() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>Lost Items</h1>
-        <Link to="/submit" className={styles.reportLink}>
-          <Button>+ Report Lost Item</Button>
-        </Link>
+        <button type="button" className={styles.reportLink} onClick={() => navigate("/submit")}>
+          + Report Lost Item
+        </button>
       </header>
 
       <div className={styles.filters}>

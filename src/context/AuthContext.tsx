@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import type { PropsWithChildren } from "react";
 import type { AuthUser } from "../types/user";
 import { getToken, removeToken, setToken } from "../utils/storage";
@@ -14,12 +14,8 @@ type AuthContextValue = {
 export const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [token, updateToken] = useState<string | null>(null);
+  const [token, updateToken] = useState<string | null>(() => getToken());
   const [user, setUser] = useState<AuthUser | null>(null);
-
-  useEffect(() => {
-    updateToken(getToken());
-  }, []);
 
   const value = useMemo<AuthContextValue>(
     () => ({

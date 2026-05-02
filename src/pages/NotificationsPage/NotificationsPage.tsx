@@ -103,7 +103,7 @@ export default function NotificationsPage() {
       <div className={styles.notificationsList}>
         {visibleNotifications.map((n) => (
           <article key={n.id} className={`${styles.notificationCard} ${!n.read ? styles.unread : ""}`}>
-            <div className={styles.icon}>{n.read ? "✔" : "•"}</div>
+            <div className={styles.icon}>{n.read ? "✓" : "•"}</div>
             <div className={styles.content}>
               <p className={styles.title}>{n.title}</p>
               <p className={styles.message}>{n.message}</p>

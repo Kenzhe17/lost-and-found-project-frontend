@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./FoundPage.module.css";
-import Button from "../../components/ui/Button/Button";
 import { getItems } from "../../api/items";
 import type { Item } from "../../types/item";
 
@@ -14,6 +13,7 @@ function getStatusLabel(status: Item["status"]) {
 }
 
 export default function FoundPage() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Items");
   const [items, setItems] = useState<Item[]>([]);
@@ -54,9 +54,9 @@ export default function FoundPage() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>Found Items</h1>
-        <Link to="/submit" className={styles.reportLink}>
-          <Button>+ Report Found Item</Button>
-        </Link>
+        <button type="button" className={styles.reportLink} onClick={() => navigate("/submit")}>
+          + Report Found Item
+        </button>
       </header>
 
       <div className={styles.filters}>
@@ -113,9 +113,7 @@ export default function FoundPage() {
               </span>
 
               <Link to={`/items/${item.id}/claim`} className={styles.claimLink}>
-                <Button variant="outline" fullWidth>
-                  Claim Item
-                </Button>
+                Claim Item
               </Link>
             </div>
           </article>

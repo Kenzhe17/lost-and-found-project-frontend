@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 import Button from "../../components/ui/Button/Button";
 import Input from "../../components/ui/Input/Input";
@@ -8,6 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login: saveSession } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -34,7 +35,8 @@ export default function LoginPage() {
         // Future option: session storage support if needed
       }
 
-      navigate("/home");
+      const from = (location.state as { from?: string } | null)?.from;
+      navigate(typeof from === "string" ? from : "/home");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {
@@ -46,7 +48,7 @@ export default function LoginPage() {
     <div className={styles.page}>
       <header className={styles.nav}>
         <div className={styles.brandMark} aria-hidden="true">
-          ❤
+          ♥
         </div>
         <span className={styles.brandName}>TapQoi</span>
       </header>
@@ -88,9 +90,9 @@ export default function LoginPage() {
                 />
                 Remember me
               </label>
-              <a href="#" className={styles.forgot}>
-                Forgot password?
-              </a>
+              <button type="button" className={styles.forgot} disabled>
+                Forgot password (coming soon)
+              </button>
             </div>
 
             {error && email && password ? <p className={styles.error}>{error}</p> : null}
@@ -102,7 +104,7 @@ export default function LoginPage() {
 
           <div className={styles.divider}>Or continue with</div>
 
-          <Button type="button" variant="outline" fullWidth>
+          <Button type="button" variant="outline" fullWidth disabled aria-disabled="true">
             Google
           </Button>
         </section>

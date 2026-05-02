@@ -57,7 +57,7 @@ export default function SignupPage() {
     <div className={styles.page}>
       <header className={styles.nav}>
         <div className={styles.brandMark} aria-hidden="true">
-          ❤
+          ♥
         </div>
         <span className={styles.brandName}>TapQoi</span>
       </header>
@@ -115,10 +115,7 @@ export default function SignupPage() {
                 checked={agreeTerms}
                 onChange={() => setAgreeTerms((prev) => !prev)}
               />
-              <span>
-                I agree to the <a href="#">Terms of Service</a> and{" "}
-                <a href="#">Privacy Policy</a>
-              </span>
+              <span>I agree to the Terms of Service and Privacy Policy</span>
             </label>
 
             {error && (
@@ -134,7 +131,7 @@ export default function SignupPage() {
 
           <div className={styles.divider}>Or sign up with</div>
 
-          <Button type="button" variant="outline" fullWidth>
+          <Button type="button" variant="outline" fullWidth disabled aria-disabled="true">
             Google
           </Button>
         </section>
