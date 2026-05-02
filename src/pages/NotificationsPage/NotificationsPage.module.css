@@ -4,6 +4,24 @@
   min-height: 100vh;
 }
 
+.topActions {
+  margin-bottom: 8px;
+}
+
+.homeLink {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #111827;
+  text-decoration: none;
+  font-weight: 600;
+}
+
 .header {
   display: flex;
   justify-content: space-between;

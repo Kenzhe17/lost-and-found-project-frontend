@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./SettingsPage.module.css";
 import Button from "../../components/ui/Button/Button";
 import Input from "../../components/ui/Input/Input";
@@ -75,6 +76,11 @@ export default function SettingsPage() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.topActions}>
+        <Link to="/home" className={styles.homeLink}>
+          Home
+        </Link>
+      </div>
       <h1 className={styles.title}>Settings</h1>
       <p className={styles.subtitle}>Manage your account preferences and settings</p>
 
