@@ -54,9 +54,14 @@ export default function FoundPage() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>Found Items</h1>
-        <button type="button" className={styles.reportLink} onClick={() => navigate("/submit")}>
-          + Report Found Item
-        </button>
+        <div className={styles.headerActions}>
+          <Link to="/home" className={styles.homeLink}>
+            Home
+          </Link>
+          <button type="button" className={styles.reportLink} onClick={() => navigate("/submit")}>
+            + Report Found Item
+          </button>
+        </div>
       </header>
 
       <div className={styles.filters}>
