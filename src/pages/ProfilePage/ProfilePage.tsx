@@ -92,7 +92,7 @@ export default function ProfilePage() {
           <Link to="/home" className={styles.navLink}>
             Home
           </Link>
-          <a href="#reported-items" className={`${styles.navLink} ${styles.active}`}>
+          <a href="#reported-items-list" className={`${styles.navLink} ${styles.active}`}>
             Reported Items
           </a>
           <Link to="/notifications" className={styles.navLink}>
@@ -109,7 +109,7 @@ export default function ProfilePage() {
 
         {items.length === 0 ? <p className={styles.empty}>You have no reported items yet.</p> : null}
 
-        <div className={styles.itemsList}>
+        <div id="reported-items-list" className={styles.itemsList}>
           {items.map((item) => (
             <article key={item.id} className={styles.itemCard}>
               <img

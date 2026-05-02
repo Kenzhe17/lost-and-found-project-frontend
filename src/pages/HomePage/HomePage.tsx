@@ -101,14 +101,6 @@ export default function HomePage() {
               Search Found
             </button>
           </div>
-          <div className={styles.reportButtons}>
-            <Link to="/submit" className={styles.reportLink}>
-              <span className={styles.lostBtn}>+ Report Lost Item</span>
-            </Link>
-            <Link to="/submit" className={styles.reportLink}>
-              <span className={styles.foundBtn}>+ Report Found Item</span>
-            </Link>
-          </div>
         </div>
       </header>
 

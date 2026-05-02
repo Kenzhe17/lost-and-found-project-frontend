@@ -104,23 +104,12 @@
   padding: 0 12px;
 }
 
-.reportButtons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
 .searchActions {
   display: flex;
   justify-content: center;
   gap: 12px;
   margin-bottom: 12px;
   flex-wrap: wrap;
-}
-
-.reportLink {
-  text-decoration: none;
 }
 
 .lostBtn,
@@ -200,11 +189,6 @@
   .searchInput,
   .select {
     width: min(420px, 100%);
-  }
-
-  .reportButtons {
-    flex-direction: column;
-    align-items: center;
   }
 
   .searchActions {
