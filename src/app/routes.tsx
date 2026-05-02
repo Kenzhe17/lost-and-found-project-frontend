@@ -3,8 +3,7 @@ import ProtectedRoute from "../components/auth/ProtectedRoute";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import SignupPage from "../pages/SignupPage/SignupPage";
 import HomePage from "../pages/HomePage/HomePage";
-import LostPage from "../pages/LostPage/LostPage";
-import FoundPage from "../pages/FoundPage/FoundPage";
+import ItemsPage from "../pages/ItemsPage/ItemsPage";
 import SubmitPage from "../pages/SubmitPage/SubmitPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import SettingsPage from "../pages/SettingsPage/SettingsPage";
@@ -20,21 +19,15 @@ export function AppRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route
-        path="/lost"
+        path="/items"
         element={
           <ProtectedRoute>
-            <LostPage />
+            <ItemsPage />
           </ProtectedRoute>
         }
       />
-      <Route
-        path="/found"
-        element={
-          <ProtectedRoute>
-            <FoundPage />
-          </ProtectedRoute>
-        }
-      />
+      <Route path="/lost" element={<Navigate to="/items?type=LOST" replace />} />
+      <Route path="/found" element={<Navigate to="/items?type=FOUND" replace />} />
       <Route
         path="/submit"
         element={

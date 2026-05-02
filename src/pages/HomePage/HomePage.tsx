@@ -46,8 +46,8 @@ export default function HomePage() {
     const params = new URLSearchParams();
     params.set("query", item.title);
     if (street) params.set("street", street);
-    const base = item.type === "FOUND" ? "/found" : "/lost";
-    navigate(`${base}?${params.toString()}`);
+    params.set("type", item.type);
+    navigate(`/items?${params.toString()}`);
   };
 
   return (
