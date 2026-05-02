@@ -16,8 +16,38 @@
   font-size: 2rem;
 }
 
-.reportLink {
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.homeLink {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #111827;
   text-decoration: none;
+  font-weight: 600;
+}
+
+.reportLink {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid #4a90e2;
+  border-radius: 8px;
+  background: #4a90e2;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .filters {
@@ -126,6 +156,10 @@
   .header {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .headerActions {
+    justify-content: space-between;
   }
 
   .itemsGrid {

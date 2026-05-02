@@ -48,9 +48,14 @@ export default function LostPage() {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>Lost Items</h1>
-        <button type="button" className={styles.reportLink} onClick={() => navigate("/submit")}>
-          + Report Lost Item
-        </button>
+        <div className={styles.headerActions}>
+          <Link to="/home" className={styles.homeLink}>
+            Home
+          </Link>
+          <button type="button" className={styles.reportLink} onClick={() => navigate("/submit")}>
+            + Report Lost Item
+          </button>
+        </div>
       </header>
 
       <div className={styles.filters}>
